@@ -1,3 +1,3 @@
 class PlayerList:
-    def __init__(self, pointer: None):
-        self.pointer = pointer
+    def __init__(self, head: None):
+        self.head = head
