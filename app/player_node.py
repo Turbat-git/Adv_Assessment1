@@ -1,35 +1,37 @@
-from player import Player
+from app.player import Player
 
 
 class PlayerNode:
     def __init__(self, player):
-        self._player = player
-        self._prev_node = None
-        self._next_node = None
+        self.__player = player
+        self.__prev_node = None
+        self.__next_node = None
 
     @property
-    def player(self) -> Player:
-        return self._player
+    def player(self):
+        return self.__player
 
     @property
-    def get_next(self):
-        return self._next_node
+    def next(self):
+        return self.__next_node
 
     @property
-    def get_previous(self):
-        return self._prev_node
+    def previous(self):
+        return self.__prev_node
 
-    def set_next(self, node):
-        self._next_node = node
+    @next.setter
+    def next(self, node):
+        self.__next_node = node
 
-    def set_previous(self, node):
-        self._prev_node = node
+    @previous.setter
+    def previous(self, node):
+        self.__prev_node = node
 
     @property
     def key(self):
         return self.player.uid
 
     def __str__(self):
-        return (f"Current player is {self.player}. Player id: {self.key}. Next node is {self.get_next} and previous "
-                f"node is {self.get_previous}")
+        return (f"Current player is {self.player}. Player id: {self.key}. Next node is {self.next} and previous "
+                f"node is {self.previous}")
 
