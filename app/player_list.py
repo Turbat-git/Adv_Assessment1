@@ -81,3 +81,22 @@ class PlayerList:
                     return current.player
             current = current.next
         return None
+
+    #Prints out the items of the Linked List. Head to tail if Forward is True, Tail to head if false.
+    def display(self, forward=True):
+        if self.is_empty():
+            print("The list is empty.")
+            return
+
+        if forward:
+            current = self.__head
+            print("Displaying list from head to tail:")
+            while current:
+                print(current.player)
+                current = current.next
+        else:
+            current = self.__tail
+            print("Displaying list from tail to head:")
+            while current:
+                print(current.player)
+                current = current.previous
