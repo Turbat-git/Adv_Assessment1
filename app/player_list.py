@@ -65,3 +65,19 @@ class PlayerList:
             self.__tail = self.__tail.previous
             self.__tail.next = None
         return removed_node.player
+
+    #Delete a node through key, and return None result if not found
+    def delete_by_key(self, key):
+        current = self.__head
+        while current is not None:
+            if current.key == key:
+                if current == self.__head:
+                    return self.delete_head()
+                elif current == self.__tail:
+                    return self.delete_tail()
+                else:
+                    current.previous.next = current.next
+                    current.next.previous = current.previous
+                    return current.player
+            current = current.next
+        return None
