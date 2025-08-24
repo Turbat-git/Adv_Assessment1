@@ -15,14 +15,18 @@ class TestPlayerList(unittest.TestCase):
     def test_insert_at_head_non_empty_list(self):
         plist = PlayerList()
         p1 = Player("1234", "Trial Person")
-        p2 = Player("4321", "Person Trial")
+        p2 = Player("1235", "Person Trial")
+        p3 = Player("1236", "Person Person")
 
         plist.insert_at_head(p1)
         plist.insert_at_head(p2)
+        plist.insert_at_head(p3)
 
-        self.assertEqual(plist.head.player, p2)
-        self.assertEqual(plist.head.next.player, p1)
-        self.assertEqual(plist.head.next.previous.player, p2)
+        self.assertEqual(plist.head.player, p3)
+        self.assertEqual(plist.head.next.player, p2)
+        self.assertEqual(plist.head.next.previous.player, p3)
+        self.assertEqual(plist.tail.player, p1)
+        self.assertIsNone(plist.tail.next)
 
 if __name__ == '__main__':
     unittest.main()
