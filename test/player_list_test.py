@@ -47,5 +47,27 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(plist.tail.previous.player, self.p2)
         self.assertIsNone(plist.tail.next)
 
+    def test_delete_head(self):
+        plist = PlayerList()
+
+        plist.insert_at_head(self.p1)
+        plist.insert_at_head(self.p2)
+        plist.insert_at_head(self.p3)
+        removed = plist.delete_head()
+
+        self.assertEqual(removed, self.p3)
+        self.assertEqual(plist.head.player, self.p2)
+
+    def test_delete_tail(self):
+        plist = PlayerList()
+
+        plist.insert_at_head(self.p1)
+        plist.insert_at_head(self.p2)
+        plist.insert_at_head(self.p3)
+        removed = plist.delete_tail()
+
+        self.assertEqual(removed, self.p1)
+        self.assertEqual(plist.tail.player, self.p2)
+
 if __name__ == '__main__':
     unittest.main()
