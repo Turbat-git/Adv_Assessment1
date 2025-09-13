@@ -29,8 +29,27 @@ class PlayerHashMap:
         else:
             return Player.pearson_hash(key, 256) % self.SIZE
 
-    def __getitem__(self) -> Player | None:
-        pass
+    def __getitem__(self, key: str) -> Player | None:
+        """
+        Returns the Player object for the given ID. None if the ID doesn't exist.
+
+        :param key: Player's unique ID.
+        :return: Player object. None if the ID doesn't exist.'
+        """
+        #Get the player's appropriate PlayerList
+        player_list = self.hashmap[self.get_index(key)]
+
+        current = player_list.head
+
+        #If exists, get the Player Object
+        while current:
+            if current.key == key:
+                return current.player
+            current = current.next
+
+        #If player doesn't exist return None
+        return None
+
 
     def __setitem__(self, key: str, name: str) -> None:
         """
