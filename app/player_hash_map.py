@@ -108,12 +108,27 @@ class PlayerHashMap:
 
         return removed_player
 
+    def remove(self, key: str) -> None:
+        """Removes a player from the hash table using the given ID."""
+        self.__delitem__(key)
+
+    def size(self) -> int:
+        """Return the number of Player objects in the hash table."""
+        return self.__len__()
+
+    def get(self, key: str) -> Player | None:
+        """Returns the Player object for the given ID. None if the ID doesn't exist."""
+        return self.__getitem__(key)
+
+    def set(self, key: str, name: str) -> None:
+        """Add a new Player or update the existing Player's name in the hash table."""
+        return self.__setitem__(key, name)
 
     def display(self) -> None:
         """
         Prints the index of the PlayerList and the players in the list
         """
         for index, player_list in enumerate(self.hashmap):
-            if not player_list.is_empty:
+            if not player_list.is_empty():
                 print(index)
                 player_list.display(True)
