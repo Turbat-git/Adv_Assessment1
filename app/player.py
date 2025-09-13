@@ -23,6 +23,8 @@ class Player:
                      key: str,
                      table_size: int) -> int:
         """
+        Pearson hash
+
         :param key: Take in the player's unique ID
         :param table_size: Size of the pearson hash function's table is used for hashing
         :return: Hash value of the player's unique ID
