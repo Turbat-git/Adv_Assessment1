@@ -1,7 +1,9 @@
-from typing import AnyStr
-
 class Player:
-    def __init__(self, unique_id: AnyStr, player_name: AnyStr):
+    def __init__(self, unique_id: str, player_name: str):
+        """
+        :param unique_id: Unique ID of the player
+        :param player_name: Name of the player
+        """
         self.unique_id = unique_id
         self.player_name = player_name
 
@@ -20,6 +22,11 @@ class Player:
     def pearson_hash(cls,
                      key: str,
                      table_size: int) -> int:
+        """
+        :param key: Take in the player's unique ID
+        :param table_size: Size of the pearson hash function's table is used for hashing
+        :return: Hash value of the player's unique ID
+        """
         hash_value = 0
         lookup_table = list(range(table_size))
 
@@ -28,6 +35,9 @@ class Player:
         return hash_value % size
 
     def __hash__(self):
+        """
+        :return: Returns the hash value using the pearson hash function not the python hash function
+        """
         return self.pearson_hash(self.uid, 256)
 
     def __eq__(self, other):
