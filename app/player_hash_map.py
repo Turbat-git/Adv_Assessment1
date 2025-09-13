@@ -75,5 +75,11 @@ class PlayerHashMap:
         new_player = Player(key, name)
         player_list.insert_at_tail(new_player)
 
-    def display(self):
-        pass
+    def display(self) -> None:
+        """
+        Prints the index of the PlayerList and the players in the list
+        """
+        for index, player_list in enumerate(self.hashmap):
+            if not player_list.is_empty:
+                print(index)
+                player_list.display(True)
