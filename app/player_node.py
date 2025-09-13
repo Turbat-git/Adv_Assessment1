@@ -4,6 +4,8 @@ class PlayerNode:
     """
     def __init__(self, player):
         """
+        Initialize PlayerNode object
+
         :param player: Player object within the node
         """
         self._player = player
