@@ -1,6 +1,6 @@
 import random
-from app.player import Player
-from app.player_list import PlayerList
+from player import Player
+from player_list import PlayerList
 
 
 class PlayerHashMap:
@@ -91,7 +91,7 @@ class PlayerHashMap:
                 current = current.next
         return count
 
-    def __delitem__(self, key: str) -> Player | None:
+    def __delitem__(self, key: str) -> Player:
         """
         Finds the Player object with the given ID and deletes it.
 

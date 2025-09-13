@@ -1,6 +1,6 @@
 import unittest
-from app.player import Player
-from app.player_list import PlayerList
+from player import Player
+from player_list import PlayerList
 
 class TestPlayerList(unittest.TestCase):
     def setUp(self):

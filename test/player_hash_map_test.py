@@ -1,5 +1,5 @@
 import unittest
-from app.player_hash_map import PlayerHashMap
+from player_hash_map import PlayerHashMap
 
 class TestPlayerList(unittest.TestCase):
     def setUp(self):
