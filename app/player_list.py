@@ -66,7 +66,7 @@ class PlayerList:
         :return: Player object of the removed head node.
         """
         if self.is_empty():
-            return None
+            raise IndexError('The list is empty')
         removed_node = self._head
         if self._head == self._tail:
             self._head = self._tail = None
@@ -82,7 +82,7 @@ class PlayerList:
         :return: Player object of the removed tail node.
         """
         if self.is_empty():
-            return None
+            raise IndexError('The list is empty')
         removed_node = self._tail
         if self._head == self._tail:
             self._head = self._tail = None
@@ -110,7 +110,7 @@ class PlayerList:
                     current.next.previous = current.previous
                     return current.player
             current = current.next
-        return None
+        raise IndexError('The Player with this ID does not exist')
 
     def display(self, forward=True):
         """
@@ -120,7 +120,7 @@ class PlayerList:
         :return: Printed list
         """
         if self.is_empty():
-            print("The list is empty.")
+            raise IndexError('The list is empty')
 
         if forward:
             current = self._head
