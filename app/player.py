@@ -20,12 +20,15 @@ class Player:
     def pearson_hash(cls,
                      key: str,
                      table_size: int) -> int:
-        hash_ = 0
+        hash_value = 0
         lookup_table = list(range(table_size))
 
         for char in key:
-            hash_ = lookup_table[hash_ ^ ord(char)]
-        return hash_ % size
+            hash_value = lookup_table[hash_value ^ ord(char)]
+        return hash_value % size
 
     def __hash__(self):
         return self.pearson_hash(self.uid, 256)
+
+    def __eq__(self, other):
+        return self.uid == other.uid
