@@ -9,11 +9,11 @@ class TestPlayerList(unittest.TestCase):
         self.p3 = Player("1236", "Person Person")
 
     def test_insert_at_head_empty_list(self):
-        plist = PlayerList()
-        plist.insert_at_head(self.p1)
+        player_list = PlayerList()
+        player_list.insert_at_head(self.p1)
 
-        self.assertFalse(plist.is_empty())
-        self.assertEqual(plist.head.player, self.p1)
+        self.assertFalse(player_list.is_empty())
+        self.assertEqual(player_list.head.player, self.p1)
 
     def test_insert_at_head_non_empty_list(self):
         plist = PlayerList()
