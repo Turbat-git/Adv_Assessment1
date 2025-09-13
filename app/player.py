@@ -1,6 +1,8 @@
 class Player:
     def __init__(self, unique_id: str, player_name: str):
         """
+        Initialize a Player Object
+
         :param unique_id: Unique ID of the player
         :param player_name: Name of the player
         """
@@ -23,7 +25,7 @@ class Player:
                      key: str,
                      table_size: int) -> int:
         """
-        Pearson hash
+        Computes the Pearson Hash of a player's unique ID
 
         :param key: Take in the player's unique ID
         :param table_size: Size of the pearson hash function's table is used for hashing
@@ -38,9 +40,17 @@ class Player:
 
     def __hash__(self):
         """
-        :return: Returns the hash value using the pearson hash function not the python hash function
+        Returns the hash value using the pearson hash function not the python hash function
+
+        :return: Hash of the player's unique ID.
         """
         return self.pearson_hash(self.uid, 256)
 
     def __eq__(self, other):
+        """
+        Checks if two players' IDs are equal
+
+        :param other: Another Player object
+        :return: Boolean. If the unique IDs are same, True is returned.
+        """
         return self.uid == other.uid
