@@ -27,14 +27,14 @@ class PlayerHashMap:
         if isinstance(key, Player):
             return hash(key) % self.SIZE
         else:
-            return Player.pearson_hash(key, 256) % self.SIZE
+            raise TypeError(f"{key} must be an instance of Player")
 
-    def __getitem__(self, key: str) -> Player | None:
+    def __getitem__(self, key: str) -> Player:
         """
-        Returns the Player object for the given ID. None if the ID doesn't exist.
+        Returns the Player object for the given ID. Raises exception if the ID doesn't exist.
 
         :param key: Player's unique ID.
-        :return: Player object. None if the ID doesn't exist.'
+        :return: Player object. Raises exception if the ID doesn't exist.'
         """
         #Get the player's appropriate PlayerList
         player_list = self.hashmap[self.get_index(key)]
@@ -48,7 +48,7 @@ class PlayerHashMap:
             current = current.next
 
         #If player doesn't exist return None
-        return None
+        raise KeyError(f"{key} doesn't exist!")
 
 
     def __setitem__(self, key: str, name: str) -> None:
@@ -104,7 +104,7 @@ class PlayerHashMap:
 
         if removed_player is None:
             print("Player Not Found.")
-            return None
+            raise KeyError(f"{key} doesn't exist!")
 
         return removed_player
 
