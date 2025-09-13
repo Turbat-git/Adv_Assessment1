@@ -75,6 +75,22 @@ class PlayerHashMap:
         new_player = Player(key, name)
         player_list.insert_at_tail(new_player)
 
+    def __len__(self) -> int:
+        """
+        Return the number of Player objects in the hash table.
+
+        :return: Integer. Count of the Player objects.
+        """
+
+        count = 0
+
+        for player_list in self.hashmap:
+            current = player_list.head
+            while current:
+                count += 1
+                current = current.next
+        return count
+
     def display(self) -> None:
         """
         Prints the index of the PlayerList and the players in the list
