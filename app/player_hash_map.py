@@ -91,6 +91,24 @@ class PlayerHashMap:
                 current = current.next
         return count
 
+    def __delitem__(self, key: str) -> Player | None:
+        """
+        Finds the Player object with the given ID and deletes it.
+
+        :param key: Player's unique ID.
+        :return: None.
+        """
+        player_list = self.hashmap[self.get_index(key)]
+
+        removed_player = player_list.delete_by_key(key)
+
+        if removed_player is None:
+            print("Player Not Found.")
+            return None
+
+        return removed_player
+
+
     def display(self) -> None:
         """
         Prints the index of the PlayerList and the players in the list
