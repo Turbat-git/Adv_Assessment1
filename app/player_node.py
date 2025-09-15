@@ -1,8 +1,11 @@
+from player import Player
+
+
 class PlayerNode:
     """
     A node in a doubly linked list that has a Player object.
     """
-    def __init__(self, player):
+    def __init__(self, player: Player):
         """
         Initialize PlayerNode object
 
@@ -13,7 +16,7 @@ class PlayerNode:
         self._next_node = None
 
     @property
-    def player(self):
+    def player(self) -> Player | None:
         return self._player
 
     @property
@@ -33,7 +36,7 @@ class PlayerNode:
         self._prev_node = node
 
     @property
-    def key(self):
+    def key(self) -> str:
         return self.player.uid
 
     def __str__(self):
