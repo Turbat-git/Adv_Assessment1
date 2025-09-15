@@ -1,7 +1,11 @@
-from typing import AnyStr
-
 class Player:
-    def __init__(self, unique_id: AnyStr, player_name: AnyStr):
+    def __init__(self, unique_id: str, player_name: str):
+        """
+        Initialize a Player Object
+
+        :param unique_id: Unique ID of the player
+        :param player_name: Name of the player
+        """
         self.unique_id = unique_id
         self.player_name = player_name
 

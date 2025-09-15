@@ -1,101 +1,138 @@
-from app.player_node import PlayerNode
+from player_node import PlayerNode
+from player import Player
+
 
 class PlayerList:
+    """
+    A doubly linked list that contains nodes PlayerNode objects.
+    """
     def __init__(self):
-        self.__head = None
-        self.__tail = None
+        """
+        Initialize a PlayerList Object.
+        """
+        self._head = None
+        self._tail = None
 
     @property
     def head(self):
-        return self.__head
+        return self._head
 
     @property
     def tail(self):
-        return self.__tail
+        return self._tail
 
-    #Checks if the head is empty or not
-    def is_empty(self):
+    def is_empty(self) -> bool:
+        """
+        Checks if the list is empty.
+
+        :return: Boolean indicating if the list is empty.
+        """
         if self.head is None:
             return True
         else:
             return False
 
-    #Insert a node at the head
-    def insert_at_head(self, player):
+    def insert_at_head(self, player: Player):
+        """
+        Inserts a player at the head node.
+
+        :param player: Adds a player object to the head node of the list.
+        """
         new_node = PlayerNode(player)
         if self.is_empty():
-            self.__head = new_node
-            self.__tail = new_node
+            self._head = new_node
+            self._tail = new_node
         else:
-            new_node.next = self.__head
-            self.__head.previous = new_node
-            self.__head = new_node
+            new_node.next = self._head
+            self._head.previous = new_node
+            self._head = new_node
 
-    #Insert a node at the head
-    def insert_at_tail(self, player):
+    def insert_at_tail(self, player: Player):
+        """
+        Inserts a player at the tail node.
+
+        :param player: Takes in a Player object to add at tail node of the list
+        """
         new_node = PlayerNode(player)
         if self.is_empty():
-            self.__head = new_node
-            self.__tail = new_node
+            self._head = new_node
+            self._tail = new_node
         else:
-            new_node.previous = self.__tail
-            self.__tail.next = new_node
-            self.__tail = new_node
+            new_node.previous = self._tail
+            self._tail.next = new_node
+            self._tail = new_node
 
-    #Delete a node that's at the head
-    def delete_head(self):
+    def delete_head(self) -> Player:
+        """
+        Remove and return the Player object at the head node.
+
+        :return: Player object of the removed head node.
+        """
         if self.is_empty():
-            return None
-        removed_node = self.__head
-        if self.__head == self.__tail:
-            self.__head = self.__tail = None
+            raise IndexError('The list is empty')
+        removed_node = self._head
+        if self._head == self._tail:
+            self._head = self._tail = None
         else:
-            self.__head = self.__head.next
-            self.__head.previous = None
+            self._head = self._head.next
+            self._head.previous = None
         return removed_node.player
 
-    #Delete a node that's at the tail
-    def delete_tail(self):
+    def delete_tail(self) -> Player:
+        """
+        Remove and return the Player object at the tail node.
+
+        :return: Player object of the removed tail node.
+        """
         if self.is_empty():
-            return None
-        removed_node = self.__tail
-        if self.__head == self.__tail:
-            self.__head = self.__tail = None
+            raise IndexError('The list is empty')
+        removed_node = self._tail
+        if self._head == self._tail:
+            self._head = self._tail = None
         else:
-            self.__tail = self.__tail.previous
-            self.__tail.next = None
+            self._tail = self._tail.previous
+            self._tail.next = None
         return removed_node.player
 
-    #Delete a node through key, and return None result if not found
-    def delete_by_key(self, key):
-        current = self.__head
+    def delete_by_key(self, key: str) -> Player:
+        """
+        Remove a node by the Player's unique ID.
+
+        :param key: Player's unique ID
+        :return: Player Object of the removed node.
+        """
+        current = self._head
         while current is not None:
             if current.key == key:
-                if current == self.__head:
+                if current == self._head:
                     return self.delete_head()
-                elif current == self.__tail:
+                elif current == self._tail:
                     return self.delete_tail()
                 else:
                     current.previous.next = current.next
                     current.next.previous = current.previous
                     return current.player
             current = current.next
-        return None
+        raise IndexError('The Player with this ID does not exist')
 
-    #Prints out the items of the Linked List. Head to tail if Forward is True, Tail to head if false.
     def display(self, forward=True):
+        """
+        Print the list of Player objects.
+
+        :param forward: Boolean value to determine whether to print from head to tail. If True, Forward. Else, Backwards.
+        :return: Printed list
+        """
         if self.is_empty():
-            print("The list is empty.")
-            return
+            raise IndexError('The list is empty')
 
         if forward:
-            current = self.__head
+            current = self._head
             print("Displaying list from head to tail:")
             while current:
                 print(current.player)
                 current = current.next
         else:
-            current = self.__tail
+            current = self._tail
             print("Displaying list from tail to head:")
             while current:
                 print(current.player)
