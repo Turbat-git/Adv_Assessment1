@@ -1,4 +1,5 @@
 from player_node import PlayerNode
+from player import Player
 
 class PlayerList:
     """
@@ -11,14 +12,14 @@ class PlayerList:
         self._tail = None
 
     @property
-    def head(self):
+    def head(self) -> PlayerNode | None:
         return self._head
 
     @property
-    def tail(self):
+    def tail(self) -> PlayerNode | None:
         return self._tail
 
-    def is_empty(self):
+    def is_empty(self) -> bool:
         """
         Checks if the list is empty.
 
@@ -29,7 +30,7 @@ class PlayerList:
         else:
             return False
 
-    def insert_at_head(self, player):
+    def insert_at_head(self, player: Player):
         """
         Inserts a player at the head node.
 
@@ -44,7 +45,7 @@ class PlayerList:
             self._head.previous = new_node
             self._head = new_node
 
-    def insert_at_tail(self, player):
+    def insert_at_tail(self, player: Player):
         """
         Inserts a player at the tail node.
 
@@ -59,7 +60,7 @@ class PlayerList:
             self._tail.next = new_node
             self._tail = new_node
 
-    def delete_head(self):
+    def delete_head(self) -> Player:
         """
         Remove and return the Player object at the head node.
 
@@ -75,7 +76,7 @@ class PlayerList:
             self._head.previous = None
         return removed_node.player
 
-    def delete_tail(self):
+    def delete_tail(self) -> Player:
         """
         Remove and return the Player object at the tail node.
 
@@ -91,12 +92,12 @@ class PlayerList:
             self._tail.next = None
         return removed_node.player
 
-    def delete_by_key(self, key):
+    def delete_by_key(self, key: str) -> Player:
         """
         Remove a node by the Player's unique ID.
 
         :param key: Player's unique ID
-        :return: Player Object of the removed node or None if no node was found.
+        :return: Player Object of the removed node.
         """
         current = self._head
         while current is not None:
