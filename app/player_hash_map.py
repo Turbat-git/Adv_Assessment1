@@ -25,8 +25,10 @@ class PlayerHashMap:
         """
         if isinstance(key, Player):
             return hash(key) % self.SIZE
-        else:
+        elif isinstance(key, str):
             return Player.pearson_hash(key) % self.SIZE
+        else:
+            raise TypeError("Value entered must either be Player or a Player's unique ID")
 
     def __getitem__(self, key: str) -> Player:
         """
