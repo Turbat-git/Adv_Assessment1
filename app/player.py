@@ -38,7 +38,7 @@ class Player:
             hash_value = lookup_table[hash_value ^ ord(char)]
         return hash_value % table_size
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Returns the hash value using the pearson hash function not the python hash function
 
@@ -46,7 +46,7 @@ class Player:
         """
         return self.pearson_hash(self.uid, 256)
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         """
         Checks if two players' IDs are equal
 
