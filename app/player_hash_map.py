@@ -1,4 +1,3 @@
-import random
 from player import Player
 from player_list import PlayerList
 
@@ -21,35 +20,34 @@ class PlayerHashMap:
         """
         Get the index of the given key.
 
-        :param key: Player's unique ID.
+        :param key: Player's unique ID or the Player class.
         :return: The index of where the key should be stored in the hash table.
         """
         if isinstance(key, Player):
             return hash(key) % self.SIZE
         else:
-            raise TypeError(f"{key} must be an instance of Player")
+            return Player.pearson_hash(key) % self.SIZE
 
     def __getitem__(self, key: str) -> Player:
         """
         Returns the Player object for the given ID. Raises exception if the ID doesn't exist.
 
         :param key: Player's unique ID.
-        :return: Player object. Raises exception if the ID doesn't exist.'
+        :return: Player object. Raises exception if the ID doesn't exist.
         """
-        #Get the player's appropriate PlayerList
+        # Get the player's appropriate PlayerList
         player_list = self.hashmap[self.get_index(key)]
 
         current = player_list.head
 
-        #If exists, get the Player Object
+        # If exists, get the Player Object
         while current:
             if current.key == key:
                 return current.player
             current = current.next
 
-        #If player doesn't exist return None
+        # If player doesn't exist return None
         raise KeyError(f"{key} doesn't exist!")
-
 
     def __setitem__(self, key: str, name: str) -> None:
         """

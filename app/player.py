@@ -8,6 +8,7 @@ class Player:
         """
         self.unique_id = unique_id
         self.player_name = player_name
+        self.table_size = 256
 
     @property
     def uid(self):
@@ -23,7 +24,7 @@ class Player:
     @classmethod
     def pearson_hash(cls,
                      key: str,
-                     table_size: int) -> int:
+                     table_size=256) -> int:
         """
         Computes the Pearson Hash of a player's unique ID
 
@@ -44,7 +45,7 @@ class Player:
 
         :return: Hash of the player's unique ID.
         """
-        return self.pearson_hash(self.uid, 256)
+        return self.pearson_hash(self.uid)
 
     def __eq__(self, other) -> bool:
         """
