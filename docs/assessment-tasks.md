@@ -257,7 +257,12 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> Both the time and space complexity would be O(n^2). Time complexity would be O(n^2) because for every value in the list
+> that needs to be sorted, the sorting function would create a new list with the values, minus 1, in it and continue doing so until
+> 1 value is left in the entire list. 
+> 
+> Space complexity would also be O(n^2) because for every value that is in the list that needs to be sorted, there will 
+> at least be one more list that will be created to sort the value.
 
 ### 5.2. Task: Implement the custom sorting algorithm
 

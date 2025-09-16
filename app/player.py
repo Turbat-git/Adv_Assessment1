@@ -1,3 +1,5 @@
+from typing import MutableSequence
+
 class Player:
     def __init__(self, unique_id: str, player_name: str, score: int = 0):
         """
@@ -82,4 +84,24 @@ class Player:
             return True
         else:
             return False
+
+    @classmethod
+    def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
+        """
+                Simple sort function that will return a list with a sorted values that are descending in order.
+
+                :param player_list: A list with int values within it.
+                :return: Sorted List with values that are descending.
+                """
+        if len(player_list) <= 1:
+            return player_list
+        pivot = player_list[0]
+        left = []
+        right = []
+        for x in player_list[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
 
