@@ -76,11 +76,18 @@ class Player:
 
     def __repr__(self):
         """Function to return the player object's details."""
-        return f"{self.__class__.__name__}(name={self.name!r}, uid={self.uid!r}, score={self._score})"
+        return f"{self.__class__.__name__}(name={self.name!r}, uid={self.uid!r}, score={self._score})\n"
 
     def __lt__(self, other) -> bool:
-        """Function to compare the score between two players' scores"""
+        """Function to compare if the score of the player is less than another player's"""
         if self._score < other._score:
+            return True
+        else:
+            return False
+
+    def __gt__(self, other) -> bool:
+        """Function to compare if the score of the player is greater than another player's"""
+        if self._score > other._score:
             return True
         else:
             return False
@@ -88,11 +95,11 @@ class Player:
     @classmethod
     def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
         """
-                Simple sort function that will return a list with a sorted values that are descending in order.
+            Simple sort function that will return a list with a sorted values that are descending in order.
 
-                :param player_list: A list with int values within it.
-                :return: Sorted List with values that are descending.
-                """
+            :param player_list: A list with int values within it.
+            :return: Sorted List with values that are descending.
+        """
         if len(player_list) <= 1:
             return player_list
         pivot = player_list[0]

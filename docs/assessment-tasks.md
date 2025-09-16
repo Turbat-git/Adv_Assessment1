@@ -277,7 +277,34 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+@classmethod
+    def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
+        """
+            Simple sort function that will return a list with a sorted values that are descending in order.
+
+            :param player_list: A list with int values within it.
+            :return: Sorted List with values that are descending.
+        """
+        if len(player_list) <= 1:
+            return player_list
+        pivot = player_list[0]
+        left = []
+        right = []
+        for x in player_list[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+
+    def test_players_score_sorting(self):
+        players = [Player(unique_id='01', player_name="Alice", score=10),
+                   Player(unique_id='02', player_name="Bob", score=5),
+                   Player(unique_id='03', player_name="Charlie", score=15)]
+
+        sorted_players = Player.sort_quickly(players)
+        self.assertLess(sorted_players[1], sorted_players[0])
+        self.assertGreater(sorted_players[1], sorted_players[2])
 ```
 
 #### 5.2.3. Success criteria
@@ -308,8 +335,14 @@ Include your test case below:
 
 ```python
 
-# YOUR TEST CASE HERE
+    def test_players_score_sorting_1000(self):
+        players = [Player(player_name=f"Player {i}",
+                          unique_id=f"{i:03}",
+                          score=random.randint(0, 1000)) for i in range(1000)]
 
+        sorted_players = Player.sort_quickly(players)
+        self.assertLess(sorted_players[1], sorted_players[0])
+        self.assertGreater(sorted_players[100], sorted_players[101])
 ```
 
 #### 5.3.2. Success criteria

@@ -1,5 +1,6 @@
 from player import Player
 import unittest
+import random
 from unittest import TestCase
 
 
@@ -38,6 +39,24 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(bob < alice)
         # or, event better
         self.assertLess(bob, alice)
+
+    def test_players_score_sorting(self):
+        players = [Player(unique_id='01', player_name="Alice", score=10),
+                   Player(unique_id='02', player_name="Bob", score=5),
+                   Player(unique_id='03', player_name="Charlie", score=15)]
+
+        sorted_players = Player.sort_quickly(players)
+        self.assertLess(sorted_players[1], sorted_players[0])
+        self.assertGreater(sorted_players[1], sorted_players[2])
+
+    def test_players_score_sorting_1000(self):
+        players = [Player(player_name=f"Player {i}",
+                          unique_id=f"{i:03}",
+                          score=random.randint(0, 1000)) for i in range(1000)]
+
+        sorted_players = Player.sort_quickly(players)
+        self.assertLess(sorted_players[1], sorted_players[0])
+        self.assertGreater(sorted_players[100], sorted_players[101])
 
 
 if __name__ == "__main__":
