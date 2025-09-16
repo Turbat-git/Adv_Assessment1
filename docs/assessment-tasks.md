@@ -447,7 +447,7 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
+I, Turbat Turkhuu (20136824), completed this work in class 306, on 16/09/2025, under the supervision of Rafael Avigad.
 ```
 
 Or (if not completed in class):
