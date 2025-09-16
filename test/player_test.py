@@ -55,6 +55,7 @@ class TestPlayer(unittest.TestCase):
                           score=random.randint(0, 1000)) for i in range(1000)]
 
         sorted_players = Player.sort_quickly(players)
+
         self.assertLess(sorted_players[1], sorted_players[0])
         self.assertGreater(sorted_players[100], sorted_players[101])
 
