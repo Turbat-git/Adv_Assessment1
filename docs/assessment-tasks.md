@@ -97,7 +97,36 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Copy the traceback you got when you ran the test here.
+C:\laragon\bin\python\python-3.13\python.exe "C:/Program Files/JetBrains/PyCharm 2023.3.2/plugins/python/helpers/pycharm/_jb_pytest_runner.py" --path C:\Users\TurkhT.TDM\source\repos\SRUS-TT-Games\test\player_test.py 
+Testing started at 12:10 pm ...
+Launching pytest with arguments C:\Users\TurkhT.TDM\source\repos\SRUS-TT-Games\test\player_test.py --no-header --no-summary -q in C:\Users\TurkhT.TDM\source\repos\SRUS-TT-Games\test
+
+============================= test session starts =============================
+collecting ... collected 3 items
+
+player_test.py::TestPlayer::test_name PASSED                             [ 33%]
+player_test.py::TestPlayer::test_sort_players FAILED                     [ 66%]
+player_test.py:14 (TestPlayer.test_sort_players)
+self = <player_test.TestPlayer testMethod=test_sort_players>
+
+    def test_sort_players(self):
+        players = [Player(unique_id='01', player_name="Alice", score=10),
+                   Player(unique_id='02', player_name="Bob", score=5),
+                   Player(unique_id='03', player_name="Charlie", score=15)]
+        # note: ensure initialization code is valid for **your** implementation.
+        # For example, is your parameter called uid? is the first parameter name?
+    
+        # do **not** change the following code:
+>       sorted_players = sorted(players)
+E       TypeError: '<' not supported between instances of 'Player' and 'Player'
+
+player_test.py:23: TypeError
+
+player_test.py::TestPlayer::test_uid PASSED                              [100%]
+
+========================= 1 failed, 2 passed in 0.05s =========================
+
+Process finished with exit code 1
 ```
 
 ### 4.3. Success criteria
@@ -115,7 +144,7 @@ What is the **only** magic method that must be implemented in the player class f
 **Hint:** if you don't recall this from class, the error message you got when you ran the test will help you.
 -------
 > Answer Here
-> Yes, here - instead of this text!
+> __lt__ magic method.
 -------
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -136,7 +165,28 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+============================= test session starts =============================
+collecting ... collected 1 item
+
+player_test.py::TestPlayer::test_players_can_be_compared_by_score 
+
+============================== 1 failed in 0.05s ==============================
+FAILED [100%]
+player_test.py:31 (TestPlayer.test_players_can_be_compared_by_score)
+self = <player_test.TestPlayer testMethod=test_players_can_be_compared_by_score>
+
+    def test_players_can_be_compared_by_score(self):
+        # note: ensure initialization code is valid for **your** implementation
+        alice = Player(player_name="Alice", unique_id='01', score=10)
+        bob = Player(player_name="Bob", unique_id='02', score=5)
+    
+        # Add the appropriate expression to the following assert test
+>       self.assertTrue(bob < alice)
+E       TypeError: '<' not supported between instances of 'Player' and 'Player'
+
+player_test.py:38: TypeError
+
+Process finished with exit code 1
 ```
 
 - Implement the appropriate magic method in the Player class and ensure you pass this test

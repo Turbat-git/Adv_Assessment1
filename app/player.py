@@ -76,3 +76,10 @@ class Player:
         """Function to return the player object's details."""
         return f"{self.__class__.__name__}(name={self.name!r}, uid={self.uid!r}, score={self._score})"
 
+    def __lt__(self, other) -> bool:
+        """Function to compare the score between two players' scores"""
+        if self._score < other._score:
+            return True
+        else:
+            return False
+
