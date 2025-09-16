@@ -1,3 +1,4 @@
+import random
 from typing import MutableSequence
 
 class Player:
@@ -102,10 +103,11 @@ class Player:
         """
         if len(player_list) <= 1:
             return player_list
-        pivot = player_list[0]
+        n = random.randint(0, len(player_list) - 1)
+        pivot = player_list.pop(n)
         left = []
         right = []
-        for x in player_list[1:]:
+        for x in player_list:
             if x > pivot:
                 left.append(x)
             else:

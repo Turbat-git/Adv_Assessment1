@@ -5,6 +5,11 @@ from unittest import TestCase
 
 
 class TestPlayer(unittest.TestCase):
+    def setUp(self):
+        self.players = [Player(player_name=f"Player {i}",
+                        unique_id=f"{i:03}",
+                        score=random.randint(0, 1000)) for i in range(1000)]
+
     def test_uid(self):
         player = Player("1234", "Trial Person")
         self.assertEqual(player.unique_id, "1234")
@@ -50,14 +55,18 @@ class TestPlayer(unittest.TestCase):
         self.assertGreater(sorted_players[1], sorted_players[2])
 
     def test_players_score_sorting_1000(self):
-        players = [Player(player_name=f"Player {i}",
-                          unique_id=f"{i:03}",
-                          score=random.randint(0, 1000)) for i in range(1000)]
-
-        sorted_players = Player.sort_quickly(players)
+        sorted_players = Player.sort_quickly(self.players)
 
         self.assertLess(sorted_players[1], sorted_players[0])
         self.assertGreater(sorted_players[100], sorted_players[101])
+
+    def test_players_sorted_score_sorting_1000(self):
+
+        first_sorted_players = Player.sort_quickly(self.players)
+        second_sorted_players = Player.sort_quickly(first_sorted_players)
+
+        self.assertLess(second_sorted_players[1], second_sorted_players[0])
+        self.assertGreater(second_sorted_players[100], second_sorted_players[101])
 
 
 if __name__ == "__main__":

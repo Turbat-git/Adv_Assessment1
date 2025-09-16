@@ -363,7 +363,34 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'player.Player'>
+player_list = [Player(name='Player 947', uid='947', score=33)
+, Player(name='Player 374', uid='374', score=31)
+, Player(name='Player...45', score=30)
+, Player(name='Player 865', uid='865', score=30)
+, Player(name='Player 512', uid='512', score=28)
+, ...]
+
+    @classmethod
+    def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
+        """
+            Simple sort function that will return a list with a sorted values that are descending in order.
+    
+            :param player_list: A list with int values within it.
+            :return: Sorted List with values that are descending.
+        """
+        if len(player_list) <= 1:
+            return player_list
+        pivot = player_list[0]
+        left = []
+        right = []
+        for x in player_list[1:]:
+>           if x > pivot:
+E           RecursionError: maximum recursion depth exceeded
+
+..\app\player.py:109: RecursionError
 ```
 
 ##### 5.3.4.1 Question: Why does the algorithm fail on presorted values?
@@ -372,13 +399,39 @@ Provide a reason why this test failed (if you got a recursion errors, you need t
 
 If your implementation did not fail, you must nevertheless explain why the senior developers algorithm has worse space complexity for presorted values.
 
-> Answer here
+> Because the list was sorted, when the sort_quickly function runs through the list again, all of its remaining values were
+> put into the list that was designated for values that were less than the 'pivot' value, aka remaining 999 value.
+> 
+> And when this happens 999 more times, the space required for the sorting function becomes, where n = memory space required
+> for 1 Player object. (1000n + 1n) * 1000/2 = 500,500n where the memory required for the sorting function is about 5,005
+> times larger than the memory needed for just the unsorted/sorted list.
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
 ```python
-# YOUR FIX HERE
+@classmethod
+    def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
+        """
+            Simple sort function that will return a list with a sorted values that are descending in order.
+
+            :param player_list: A list with int values within it.
+            :return: Sorted List with values that are descending.
+        """
+        if len(player_list) <= 1:
+            return player_list
+        n = random.randint(0, len(player_list) - 1)
+        pivot = player_list.pop(n)
+        left = []
+        right = []
+        for x in player_list:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
 # Highlight what the fix was
+# The fix was choosing an integer at random to act as the pivot so that sorted list would not end up picking one value 
+# at a time per iteration when sorting. 
 ```
 
 #### 5.3.5. Success criteria
