@@ -37,7 +37,7 @@ class TestPlayer(unittest.TestCase):
         # Add the appropriate expression to the following assert test
         self.assertTrue(bob < alice)
         # or, event better
-        self.assertLess(alice, bob)
+        self.assertLess(bob, alice)
 
 
 if __name__ == "__main__":
