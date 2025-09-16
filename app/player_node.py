@@ -17,14 +17,17 @@ class PlayerNode:
 
     @property
     def player(self) -> Player | None:
+        """Getter function for the player object"""
         return self._player
 
     @property
     def next(self):
+        """Getter function for the next node"""
         return self._next_node
 
     @property
     def previous(self):
+        """Getter function for the previous node"""
         return self._prev_node
 
     @next.setter

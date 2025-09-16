@@ -1,21 +1,38 @@
 class Player:
-    def __init__(self, unique_id: str, player_name: str):
+    def __init__(self, unique_id: str, player_name: str, score: int = 0):
         """
         Initialize a Player Object
 
         :param unique_id: Unique ID of the player
         :param player_name: Name of the player
+        :param score: Score of the player
         """
         self.unique_id = unique_id
         self.player_name = player_name
+        self._score = score
 
     @property
     def uid(self):
+        """Getter function for the unique id param"""
         return self.unique_id
 
     @property
     def name(self):
+        """Getter function for the player name param"""
         return self.player_name
+
+    @property
+    def score(self):
+        """Getter function for the score param"""
+        return self._score
+
+    @score.setter
+    def score(self, score: int):
+        """Setter function for the score param"""
+        if isinstance(score, int):
+            self._score = score
+        else:
+            raise TypeError("The score must be a positive value!")
 
     def __str__(self) -> str:
         return f"Player's name is {self.name} and ID: {self.uid}"
@@ -23,7 +40,7 @@ class Player:
     @classmethod
     def pearson_hash(cls,
                      key: str,
-                     table_size=256) -> int:
+                     table_size: int = 256) -> int:
         """
         Computes the Pearson Hash of a player's unique ID
 
@@ -54,3 +71,8 @@ class Player:
         :return: Boolean. If the unique IDs are same, True is returned.
         """
         return self.uid == other.uid
+
+    def __repr__(self):
+        """Function to return the player object's details."""
+        return f"{self.__class__.__name__}(name={self.name!r}, uid={self.uid!r}, score={self._score})"
+

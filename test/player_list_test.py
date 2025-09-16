@@ -2,6 +2,7 @@ import unittest
 from player import Player
 from player_list import PlayerList
 
+
 class TestPlayerList(unittest.TestCase):
     def setUp(self):
         self.p1 = Player("1234", "Trial Person")
