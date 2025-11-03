@@ -1,3 +1,5 @@
+from logging import raiseExceptions
+
 from player import Player
 from player_bnode import PlayerBNode
 
@@ -17,12 +19,10 @@ class PlayerBST:
         Inserts a player into the tree based on the player's score
 
         :param player: Player object
-        :param _node: To be used for recursion
-        :return:
+        :param _node: Points to the specific node in the BST
         """
         if self._root is None:
             self._root = PlayerBNode(player)
-            return self._root
 
         if _node is None:
             _node = self._root
@@ -43,5 +43,30 @@ class PlayerBST:
             else:
                 self.insert(player, _node.right)
 
-    def search(self, player: Player):
-        pass
+    def search(self, name: str, _node=None) -> Player|None:
+        """
+        Search for a player by name
+
+        :param name: Name of the player
+        :param _node: Points to the specific node in the BST
+        :return: Player or None
+        """
+        if _node is None:
+            _node = self._root
+            if _node is None:
+                return None
+
+        if name == _node.player.name:
+            return _node.player
+
+        elif name < _node.player.name:
+            if _node.left is None:
+                return None
+            else:
+                return self.search(name, _node.left)
+
+        elif name > _node.player.name:
+            if _node.right is None:
+                return None
+            else:
+                return self.search(name, _node.right)

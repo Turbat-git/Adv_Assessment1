@@ -3,7 +3,7 @@ from player_bst import PlayerBST
 from player import Player
 import random
 
-class TestPlayerBST(unittest.TestCase):
+class TestPlayerBSTInsert(unittest.TestCase):
     def test_insert_into_empty_tree(self):
         """Test inserting the first player creates the root node."""
         self.bst = PlayerBST()
@@ -62,6 +62,13 @@ class TestPlayerBST(unittest.TestCase):
         self.assertEqual(self.bst.root.player.score, 19)
         self.assertIsNone(self.bst.root.left)
         self.assertIsNone(self.bst.root.right)
+
+    def test_search_not_found(self):
+        """Test that searching for a non-existent player returns None."""
+
+        result = self.bst.search("David")
+        self.assertIsNone(result)
+
 
 if __name__ == "__main__":
     TestPlayerBST()
