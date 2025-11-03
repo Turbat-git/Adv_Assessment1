@@ -31,14 +31,17 @@ class PlayerBST:
             if player.score > _node.player.score:
                 _node.player = player
 
-        elif player < _node.player:
+        elif player.name < _node.player.name:
             if _node.left is None:
                 _node.left = PlayerBNode(player)
             else:
                 self.insert(player, _node.left)
 
-        elif player > _node.player:
+        elif player.name > _node.player.name:
             if _node.right is None:
                 _node.right = PlayerBNode(player)
             else:
                 self.insert(player, _node.right)
+
+    def search(self, player: Player):
+        pass

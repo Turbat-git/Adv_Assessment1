@@ -19,34 +19,34 @@ class TestPlayerBST(unittest.TestCase):
     def test_insert_left_and_right_nodes(self):
         """Test that inserting players alphabetically left/right builds BST correctly."""
         self.bst = PlayerBST()
-        players = [Player(unique_id='01', player_name="Alice", score=10),
-                   Player(unique_id='02', player_name="Bob", score=5),
+        players = [Player(unique_id='01', player_name="Bob", score=10),
+                   Player(unique_id='02', player_name="Alice", score=5),
                    Player(unique_id='03', player_name="Charlie", score=15)]
 
         for p in players:
             self.bst.insert(p)
 
-        self.assertEqual(self.bst.root.player.name, "Alice")
-        self.assertEqual(self.bst.root.left.player.name, "Bob")
+        self.assertEqual(self.bst.root.player.name, "Bob")
+        self.assertEqual(self.bst.root.left.player.name, "Alice")
         self.assertEqual(self.bst.root.right.player.name, "Charlie")
 
 
     def test_insert_multiple_levels(self):
         """Test inserting players forms deeper tree correctly."""
         self.bst = PlayerBST()
-        players = [Player(unique_id='01', player_name="Alice", score=10),
-                   Player(unique_id='02', player_name="Bob", score=5),
+        players = [Player(unique_id='01', player_name="Bob", score=10),
+                   Player(unique_id='02', player_name="Alice", score=5),
                    Player(unique_id='03', player_name="Charlie", score=7),
-                   Player(unique_id='04', player_name="John", score=20),
+                   Player(unique_id='04', player_name="Bane", score=20),
                    Player(unique_id='05', player_name="Doe", score=15),]
 
         for p in players:
             self.bst.insert(p)
 
-        self.assertEqual(self.bst.root.left.player.name, "Bob")
-        self.assertEqual(self.bst.root.left.right.player.name, "Charlie")
-        self.assertEqual(self.bst.root.right.player.name, "John")
-        self.assertEqual(self.bst.root.right.left.player.name, "Doe")
+        self.assertEqual(self.bst.root.left.player.name, "Alice")
+        self.assertEqual(self.bst.root.right.player.name, "Charlie")
+        self.assertEqual(self.bst.root.left.right.player.name, "Bane")
+        self.assertEqual(self.bst.root.right.right.player.name, "Doe")
 
 
     def test_insert_duplicate_updates_player(self):
