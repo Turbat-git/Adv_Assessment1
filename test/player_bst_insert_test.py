@@ -59,6 +59,18 @@ class TestPlayerBSTInsert(unittest.TestCase):
         self.assertIsNone(self.bst.root.left)
         self.assertIsNone(self.bst.root.right)
 
+    def test_insert_player_same_name(self):
+        """Test that inserting a duplicate player name updates existing node."""
+        self.bst = PlayerBST()
+        player1 = Player("1", "Mina", 10)
+        player2 = Player("2", "Mina", 19)
+
+        self.bst.insert(player1)
+        self.bst.insert(player2)
+
+        self.assertEqual(self.bst.root.player.score, 10)
+        self.assertEqual(self.bst.root.left.player.score, 19)
+
     def test_sorting_unbalanced_tree(self):
 
         sorted_tree = []
@@ -72,7 +84,7 @@ class TestPlayerBSTInsert(unittest.TestCase):
         for p in players:
             self.bst.insert(p)
 
-        self.bst.in_order_traversal(sorted_tree)
+        self.bst.in_order_traversal(sorted_tree, self.bst.root)
 
 
 if __name__ == "__main__":

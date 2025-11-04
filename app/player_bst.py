@@ -32,7 +32,7 @@ class PlayerBST:
             if player.score > node.player.score:
                 node.player = player
 
-        elif player.name < node.player.name:
+        elif player.name < node.player.name or player.name == node.player.name:
             if node.left is None:
                 node.left = PlayerBNode(player)
             else:
