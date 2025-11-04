@@ -13,6 +13,13 @@ class PlayerBST:
         """
         return self._root
 
+    @root.setter
+    def root(self, root):
+        """
+        Setter function for the root of the BST
+        """
+        self._root = root
+
     def insert(self, player: Player, node: PlayerBNode = None):
         """
         Inserts a player into the tree based on the player's score
@@ -20,11 +27,11 @@ class PlayerBST:
         :param player: Player object
         :param node: Points to the specific node in the BST
         """
-        if self._root is None:
-            self._root = PlayerBNode(player)
+        if self.root is None:
+            self.root = PlayerBNode(player)
 
         if node is None:
-            node = self._root
+            node = self.root
 
         if player.uid == node.player.uid:
             if player.score > node.player.score:
@@ -51,7 +58,7 @@ class PlayerBST:
         :return: Player or None
         """
         if node is None:
-            node = self._root
+            node = self.root
             if node is None:
                 return None
 
@@ -89,19 +96,21 @@ class PlayerBST:
 
     def create_balanced_tree(self, sorted_list: list[Player]):
         """
-        Use the sorted list to create balanced tree
+        Use a sorted list to create balanced tree
 
         :param sorted_list: List of players that had been sorted
         :return: root
         """
-        if not sorted_list:
+        if len(sorted_list) == 0:
             return None
 
         middle = len(sorted_list) // 2
 
-        self._root = PlayerBNode(sorted_list[middle])
+        player = PlayerBNode(sorted_list[middle])
 
-        self._root.left = self.create_balanced_tree(sorted_list[:middle])
-        self._root.right = self.create_balanced_tree(sorted_list[middle + 1:])
+        self.root(player)
 
-        return self._root
+        self.root.left = self.create_balanced_tree(sorted_list[:middle])
+        self.root.right = self.create_balanced_tree(sorted_list[middle + 1:])
+
+        return self.root
