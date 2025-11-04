@@ -1,5 +1,4 @@
 from logging import raiseExceptions
-
 from player import Player
 from player_bnode import PlayerBNode
 
@@ -28,7 +27,7 @@ class PlayerBST:
         if node is None:
             node = self._root
 
-        if player.unique_id == node.player.unique_id:
+        if player.uid == node.player.uid:
             if player.score > node.player.score:
                 node.player = player
 
@@ -72,12 +71,38 @@ class PlayerBST:
             else:
                 return self.search(name, node.right)
 
-    def in_order_traversal(self, array: list, node: PlayerBNode) -> list[int] | None:
+    def in_order_traversal(self, array: list, node: PlayerBNode) -> list[Player] | None:
+        """
+        Sorts the binary search tree
+
+        :param array: to be used for adding the values of the nodes
+        :param node: Points to the specific node in the BST
+        :return: List full of the player's names
+        """
         if node:
             self.in_order_traversal(array, node.left)
 
-            array.append(node.player.name)
+            array.append(node.player)
 
             self.in_order_traversal(array, node.right)
 
         return array
+
+    def create_balanced_tree(self, sorted_list: list[Player]):
+        """
+        Use the sorted list to create balanced tree
+
+        :param sorted_list: List of players that had been sorted
+        :return: root
+        """
+        if len(sorted_list) == 0:
+            return None
+
+        middle = len(sorted_list) // 2
+
+        self._root = PlayerBNode(sorted_list[middle])
+
+        self._root.left = self.create_balanced_tree(sorted_list[:middle])
+        self._root.right = self.create_balanced_tree(sorted_list[middle + 1:])
+
+        return self._root

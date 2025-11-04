@@ -2,7 +2,7 @@ from player import Player
 from player_list import PlayerList
 from player_hash_map import PlayerHashMap
 from player_bst import PlayerBST
-import random
+import random, math
 
 if __name__ == "__main__":
     sorted_tree = []
@@ -19,3 +19,7 @@ if __name__ == "__main__":
     sorted_list = bst.in_order_traversal(sorted_tree, bst.root)
     print(sorted_list)
 
+    balanced_tree = bst.create_balanced_tree(sorted_list)
+    print(balanced_tree)
+
+    
