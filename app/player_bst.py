@@ -1,4 +1,3 @@
-from logging import raiseExceptions
 from player import Player
 from player_bnode import PlayerBNode
 
@@ -95,7 +94,7 @@ class PlayerBST:
         :param sorted_list: List of players that had been sorted
         :return: root
         """
-        if len(sorted_list) == 0:
+        if not sorted_list:
             return None
 
         middle = len(sorted_list) // 2

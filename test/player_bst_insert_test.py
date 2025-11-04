@@ -72,7 +72,7 @@ class TestPlayerBSTInsert(unittest.TestCase):
         self.assertEqual(self.bst.root.left.player.score, 19)
 
     def test_sorting_unbalanced_tree(self):
-
+        """Test that sort works for unbalanced trees"""
         sorted_tree = []
         self.bst = PlayerBST()
         players = [Player(unique_id='01', player_name="Bob", score=10),
@@ -85,6 +85,31 @@ class TestPlayerBSTInsert(unittest.TestCase):
             self.bst.insert(p)
 
         self.bst.in_order_traversal(sorted_tree, self.bst.root)
+        self.assertEqual('Alice', sorted_tree[0].name)
+        self.assertEqual('Bane', sorted_tree[1].name)
+        self.assertEqual('Bob', sorted_tree[2].name)
+        self.assertEqual('Charlie', sorted_tree[3].name)
+        self.assertEqual('Doe', sorted_tree[4].name)
+
+    def test_balancing_bst(self):
+        """Test that sort works for unbalanced trees"""
+        sorted_tree = []
+        self.bst = PlayerBST()
+        players = [Player(unique_id='01', player_name="Bob", score=10),
+                   Player(unique_id='02', player_name="Alice", score=5),
+                   Player(unique_id='03', player_name="Charlie", score=7),
+                   Player(unique_id='04', player_name="Bane", score=20),
+                   Player(unique_id='05', player_name="Doe", score=15), ]
+
+        for p in players:
+            self.bst.insert(p)
+
+        sorted_tree_2 = self.bst.in_order_traversal(sorted_tree, self.bst.root)
+
+        balanced_tree = self.bst.create_balanced_tree(sorted_tree_2)
+
+        self.assertEqual('Charlie', balanced_tree.player.name)
+        self.assertEqual('Charlie', balanced_tree.right.player.name)
 
 
 if __name__ == "__main__":

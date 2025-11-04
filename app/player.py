@@ -38,7 +38,7 @@ class Player:
             raise TypeError("The score must be a positive value!")
 
     def __str__(self) -> str:
-        return f"Player's name is {self.name} and ID: {self.uid}"
+        return f"Player's name is {self.name} and ID: {self.uid}. Max Score: {self.score}"
 
     @classmethod
     def pearson_hash(cls,
