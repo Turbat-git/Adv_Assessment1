@@ -96,21 +96,19 @@ class PlayerBST:
 
     def create_balanced_tree(self, sorted_list: list[Player]):
         """
-        Use a sorted list to create balanced tree
+        Use a sorted list to create a balanced tree
 
-        :param sorted_list: List of players that had been sorted
+        :param sorted_list: List of players that have been sorted
         :return: root
         """
         if len(sorted_list) == 0:
             return None
 
         middle = len(sorted_list) // 2
+        node = PlayerBNode(sorted_list[middle])
 
-        player = PlayerBNode(sorted_list[middle])
+        node.left = self.create_balanced_tree(sorted_list[:middle])
+        node.right = self.create_balanced_tree(sorted_list[middle + 1:])
 
-        self.root(player)
+        return node
 
-        self.root.left = self.create_balanced_tree(sorted_list[:middle])
-        self.root.right = self.create_balanced_tree(sorted_list[middle + 1:])
-
-        return self.root

@@ -21,13 +21,12 @@ if __name__ == "__main__":
     print(sorted_list)
 
     balanced_tree = bst.create_balanced_tree(sorted_list)
-    # print(bst.root.left.left.left.left.player.name, balanced_tree.left.player.uid)
+    bst.root = balanced_tree
     print(bst.root.left.player.name, balanced_tree.left.player.uid)
-    # print(balanced_tree.left.right.player.name, balanced_tree.left.right.player.uid)
 
-    # print(bst.root.player.name)
-    # print(bst.root.right.player.name)
-    # print(bst.root.left.player.name)
+    print(bst.root.player.name)
+    print(bst.root.right.player.name)
+    print(bst.root.left.player.name)
 
     # print(bst.search('Aline'))
 
