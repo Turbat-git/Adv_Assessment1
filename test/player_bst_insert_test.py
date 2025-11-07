@@ -108,8 +108,9 @@ class TestPlayerBSTInsert(unittest.TestCase):
 
         balanced_tree = self.bst.create_balanced_tree(sorted_tree_2)
 
-        self.assertEqual('Charlie', balanced_tree.player.name)
-        self.assertEqual('Charlie', balanced_tree.right.player.name)
+        self.assertEqual('Bob', balanced_tree.player.name)
+        self.assertEqual('Bane', balanced_tree.left.player.name)
+        self.assertEqual('Doe', balanced_tree.right.player.name)
 
 
 if __name__ == "__main__":
