@@ -81,36 +81,35 @@ class Player:
 
     def __lt__(self, other) -> bool:
         """Function to compare if the score of the player is less than another player's"""
-        if self._score < other._score:
-            return True
-        else:
-            return False
+        return self._score < other._score
 
     def __gt__(self, other) -> bool:
         """Function to compare if the score of the player is greater than another player's"""
-        if self._score > other._score:
-            return True
-        else:
-            return False
+        return self._score > other._score
 
     @classmethod
-    def sort_quickly(cls, player_list: MutableSequence) -> MutableSequence:
+    def sort_players_desc(cls, player_list: MutableSequence) -> MutableSequence:
         """
-            Simple sort function that will return a list with a sorted values that are descending in order.
+        Sort a list of Player objects in descending order by score using quicksort.
 
-            :param player_list: A list with int values within it.
-            :return: Sorted List with values that are descending.
+        :param player_list: A list of Player objects.
+        :return: Sorted list of Player objects, descending by score.
         """
         if len(player_list) <= 1:
             return player_list
-        n = random.randint(0, len(player_list) - 1)
-        pivot = player_list.pop(n)
-        left = []
-        right = []
-        for x in player_list:
-            if x > pivot:
-                left.append(x)
+
+        pivot_index = random.randint(0, len(player_list) - 1)
+        pivot_player = player_list.pop(pivot_index)
+
+        higher_scores = []
+        lower_or_equal_scores = []
+
+        for player in player_list:
+            if player > pivot_player:
+                higher_scores.append(player)
             else:
-                right.append(x)
-        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
+                lower_or_equal_scores.append(player)
+
+        return cls.sort_players_desc(higher_scores) + [pivot_player] + cls.sort_players_desc(lower_or_equal_scores)
+
 

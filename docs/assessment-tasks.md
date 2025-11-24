@@ -214,8 +214,7 @@ Yes, the test passes.
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to do so - if that's the case, you need to figure out what that is!)?
 -------
 > Answer here
-> The 'Less Than' operator was not suppoerted between two objects of Player class and I assume that python did not know 
-> what to compare between the two objects.
+> The 'Equal', or __eq__, operator was not suppoerted between two objects of Player class. And if there is no custom __eq__ function for the class, python by default will compare them by memory address. So the test failed because the two objects were not equal.
 -------
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.
 
@@ -263,6 +262,9 @@ What is the expected time and space complexity of the above algorithm? You can a
 > 
 > Space complexity would also be O(n^2) because for every value that is in the list that needs to be sorted, there will 
 > at least be one more list that will be created to sort the value.
+
+> For the average case for time and space complexity, it would have O(log n) time complexity. Because the pivot divides the list into balanced halves, it would 
+> result in logarithmic recursion depth. The space complexity would be the same, O(log n). Each recursion call adds one stack frame and balanced partitions means that that the depth grows logarithmically.
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -399,12 +401,9 @@ Provide a reason why this test failed (if you got a recursion errors, you need t
 
 If your implementation did not fail, you must nevertheless explain why the senior developers algorithm has worse space complexity for presorted values.
 
-> Because the list was sorted, when the sort_quickly function runs through the list again, all of its remaining values were
-> put into the list that was designated for values that were less than the 'pivot' value, aka remaining 999 value.
-> 
-> And when this happens 999 more times, the space required for the sorting function becomes, where n = memory space required
-> for 1 Player object. (1000n + 1n) * 1000/2 = 500,500n where the memory required for the sorting function is about 5,005
-> times larger than the memory needed for just the unsorted/sorted list.
+> The recursion error occurs on a presorted list because the algorithm always selects the first element as the pivot. When the list is already sorted, 
+> the pivot becomes the smallest or largest item every time, causing one partition to contain all remaining elements and the other partition to be empty. 
+> This generates a recursion depth equal to the size of the list. Since Python has a recursion limit of approximately 1000, sorting 1000 already-sorted players triggers a RecursionError.
 
 Propose a fix to your sorting algorithm that fixes this issue.
 

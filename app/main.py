@@ -12,7 +12,7 @@ if __name__ == "__main__":
                       unique_id=f"{i:03}",
                       score=random.randint(0, 1000)) for i in range(1000)]
 
-    sorted_players = Player.sort_quickly(players)
+    sorted_players = Player.sort_players_desc(players)
     # print(f"{repr(sorted_players)}\n")
     print(repr(sorted_players))
 

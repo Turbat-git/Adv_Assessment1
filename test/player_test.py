@@ -50,20 +50,20 @@ class TestPlayer(unittest.TestCase):
                    Player(unique_id='02', player_name="Bob", score=5),
                    Player(unique_id='03', player_name="Charlie", score=15)]
 
-        sorted_players = Player.sort_quickly(players)
+        sorted_players = Player.sort_players_desc(players)
         self.assertLess(sorted_players[1], sorted_players[0])
         self.assertGreater(sorted_players[1], sorted_players[2])
 
     def test_players_score_sorting_1000(self):
-        sorted_players = Player.sort_quickly(self.players)
+        sorted_players = Player.sort_players_desc(self.players)
 
         self.assertLess(sorted_players[1], sorted_players[0])
         self.assertGreater(sorted_players[100], sorted_players[101])
 
     def test_players_sorted_score_sorting_1000(self):
 
-        first_sorted_players = Player.sort_quickly(self.players)
-        second_sorted_players = Player.sort_quickly(first_sorted_players)
+        first_sorted_players = Player.sort_players_desc(self.players)
+        second_sorted_players = Player.sort_players_desc(first_sorted_players)
 
         self.assertLess(second_sorted_players[1], second_sorted_players[0])
         self.assertGreater(second_sorted_players[100], second_sorted_players[101])
