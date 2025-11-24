@@ -135,3 +135,17 @@ class PlayerList:
             while current:
                 print(current.player)
                 current = current.previous
+
+    def find(self, key: str) -> Player | None:
+        """
+        Search the linked list for a node with the given key and return its player.
+
+        :param key:The key used to identify the node to retrieve.
+        :return: Player or None
+        """
+        current = self._head
+        while current:
+            if current.key == key:
+                return current.player
+            current = current.next
+        return None

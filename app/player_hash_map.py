@@ -40,16 +40,10 @@ class PlayerHashMap:
         # Get the player's appropriate PlayerList
         player_list = self.hashmap[self.get_index(key)]
 
-        current = player_list.head
-
-        # If exists, get the Player Object
-        while current:
-            if current.key == key:
-                return current.player
-            current = current.next
-
-        # If player doesn't exist return None
-        raise KeyError(f"{key} doesn't exist!")
+        player = player_list.find(key)
+        if player is None:
+            raise KeyError(f"{key} doesn't exist!")
+        return player
 
     def __setitem__(self, key: str, name: str) -> None:
         """
@@ -61,19 +55,14 @@ class PlayerHashMap:
         # get the player's appropriate PlayerList:
         player_list = self.hashmap[self.get_index(key)]
 
-        # check if the player is in the list
-        current = player_list.head
+        player = player_list.find(key)
 
-        # If it is, update the player's name
-        while current:
-            if current.key == key:
-                current.player.player_name = name  # Update the name
-                return
-            current = current.next
-
-        # If it isn't, create a player and add the player to the player list
-        new_player = Player(key, name)
-        player_list.insert_at_tail(new_player)
+        if player:
+            player.player_name = name
+        else:
+            # If player doesn't exist, create a player and add the player to the player list
+            new_player = Player(key, name)
+            player_list.insert_at_tail(new_player)
 
     def __len__(self) -> int:
         """
