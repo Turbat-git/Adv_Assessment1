@@ -18,6 +18,13 @@ class TestPlayer(unittest.TestCase):
         player = Player("1234", "Trial Person")
         self.assertEqual(player.player_name, "Trial Person")
 
+    def test_hash_function(self):
+        player = Player("test123", "Test Person")
+        h = hash(player)
+
+        self.assertIsInstance(h, int)
+        self.assertTrue(0 <= h <= 255)
+
     def test_sort_players(self):
         players = [Player(unique_id='01', player_name="Alice", score=10),
                    Player(unique_id='02', player_name="Bob", score=5),

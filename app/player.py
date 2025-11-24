@@ -1,7 +1,11 @@
 import random
-from typing import MutableSequence
+
 
 class Player:
+
+    _TABLE = list(range(256))
+    random.shuffle(_TABLE)
+
     def __init__(self, unique_id: str, player_name: str, score: int = 0):
         """
         Initialize a Player Object
@@ -42,21 +46,18 @@ class Player:
 
     @classmethod
     def pearson_hash(cls,
-                     key: str,
-                     table_size: int = 256) -> int:
+                     key: str) -> int:
         """
         Computes the Pearson Hash of a player's unique ID
 
         :param key: Take in the player's unique ID
-        :param table_size: Size of the pearson hash function's table is used for hashing
         :return: Hash value of the player's unique ID
         """
         hash_value = 0
-        lookup_table = list(range(table_size))
 
         for char in key:
-            hash_value = lookup_table[hash_value ^ ord(char)]
-        return hash_value % table_size
+            hash_value = cls._TABLE[hash_value ^ ord(char)]
+        return hash_value
 
     def __hash__(self) -> int:
         """
@@ -88,7 +89,7 @@ class Player:
         return self._score > other._score
 
     @classmethod
-    def sort_players_desc(cls, player_list: MutableSequence) -> MutableSequence:
+    def sort_players_desc(cls, player_list: list) -> list:
         """
         Sort a list of Player objects in descending order by score using quicksort.
 
